@@ -9,30 +9,12 @@ import matplotlib.pyplot as plt
 st.markdown(
     """
     <style>
-    /* Hilangkan header Streamlit */
-    header[data-testid="stHeader"] {
-        display: none !important;
-    }
-
-    /* Hilangkan footer (dibawah kiri, tulisan Made with Streamlit) */
-    footer {
-        display: none !important;
-    }
-
-    /* Hilangkan toolbar menu kanan atas (≡ / About / Settings) */
-    [data-testid="stToolbar"] {
-        display: none !important;
-    }
-
-    /* Hilangkan profil / preview (kalau ada) */
-    .stApp header, .stApp [data-testid="stDecoration"] {
-        display: none !important;
-    }
+    .stAppHeader,._container_gzau3_1,._profilePreview_gzau3_63{
+    display: none !important;}
     </style>
     """,
     unsafe_allow_html=True
 )
-
 
 # -------------------------
 # Label kelas
