@@ -11,10 +11,10 @@ st.markdown(
     <style>
     .stAppHeader,a[aria-haspopup="true"],a[href="https://streamlit.io/cloud"]{
     display: none !important;}
-     .stApp {
+     body, .stApp {
         opacity: 0;
         background-color: white;
-        animation: fadeInBody 1s ease-in 3s forwards;
+        animation: fadeInBody 1s ease-in 2s forwards;
     }
     @keyframes fadeInBody {
         from { opacity: 0; }
