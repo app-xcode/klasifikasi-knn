@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 st.markdown(
     """
     <style>
-    .stAppHeader,._container_gzau3_1,._link_gzau3_10,._profileContainer_gzau3_53{
+    .stAppHeader,a[aria-haspopup="true"],a[href="https://streamlit.io/cloud"]{
     display: none !important;}
     </style>
     """,
