@@ -246,7 +246,7 @@ if st.button("Prediksi Kelas (Model Terbaik)"):
     df_expanded = fix_labels(df_expanded)
     X = df_expanded.drop(columns=["Kelas"]).astype(int)
     y = df_expanded["Kelas"].astype(str)
-    model = KNeighborsClassifier(n_neighbors=best_overall_k)
+    model = KNeighborsClassifier(n_neighbors=best_overall_k[0])
     model.fit(X, y)
     x_new = np.array([[daya, pulsa, alat]])
     pred = model.predict(x_new)[0]
