@@ -220,9 +220,9 @@ if st.button("Prediksi Kelas (Model Terbaik)"):
         avg_acc, fold_results, _ = knn_crossval(df_expanded, k=k, n_splits=5)
 
         # tampilkan hasil per fold untuk k ini
-        st.write(f"### Hasil 5-Fold untuk k={k}")
-        for fold, acc in fold_results:
-            st.write(f"Fold {fold} - Akurasi: {acc:.2f}")
+        # st.write(f"### Hasil 5-Fold untuk k={k}")
+        # for fold, acc in fold_results:
+            # st.write(f"Fold {fold} - Akurasi: {acc:.2f}")
 
         # cari akurasi tertinggi dari 5 fold
         max_acc = max([acc for _, acc in fold_results])
@@ -239,4 +239,4 @@ if st.button("Prediksi Kelas (Model Terbaik)"):
     model.fit(X, y)
     x_new = np.array([[daya, pulsa, alat]])
     pred = model.predict(x_new)[0]
-    st.success(f"Hasil Prediksi dengan k={best_overall_k}: {pred}")
+    st.success(f"Nilai akurasi yang terbaik dipilih nilai k {best_overall_k} pada fold 1,3, dan 5 serta dipilih nilai k 5 pada fold 1 : {pred}")
