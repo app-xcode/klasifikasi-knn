@@ -239,4 +239,4 @@ if st.button("Prediksi Kelas (Model Terbaik)"):
     model.fit(X, y)
     x_new = np.array([[daya, pulsa, alat]])
     pred = model.predict(x_new)[0]
-    st.success(f"Nilai akurasi yang terbaik dipilih nilai k {best_overall_k}, hasil : {pred}")
+    st.success(f"Nilai akurasi yang terbaik dipilih nilai k {best_overall_k} dengan akurasi tertinggi {best_overall_acc * 100}% sehingga hasil prediksi kelas adalah : {pred}")
