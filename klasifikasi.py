@@ -252,7 +252,7 @@ if st.button("Prediksi Kelas (Model Terbaik)"):
     x_new = np.array([[daya, pulsa, alat]])
     pred = model.predict(x_new)[0]
     st.success(
-        f"Nilai akurasi yang terbaik dipilih {format_k_list(best_overall_k)} "
+        f"Nilai akurasi yang terbaik dipilih "
         f"dengan akurasi tertinggi {(best_overall_acc * 100):.2f}% "
         f"sehingga hasil prediksi kelas adalah : {pred}"
     )
