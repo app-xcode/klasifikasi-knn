@@ -6,6 +6,28 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, accuracy_score
 import matplotlib.pyplot as plt
 
+
+st.markdown(
+    """
+    <style>
+    .stAppHeader,a[aria-haspopup="true"],a[href="https://streamlit.io/cloud"]{
+    display: none !important;}
+     .stApp {
+     body, .stApp {
+        opacity: 0;
+        background-color: white;
+        animation: fadeInBody 1s ease-in 3s forwards;
+        animation: fadeInBody 1s ease-in 2s forwards;
+    }
+    @keyframes fadeInBody {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # -------------------------
 # Label kelas
 # -------------------------
