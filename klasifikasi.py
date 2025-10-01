@@ -175,9 +175,19 @@ if st.button("Jalankan Split Data (120:30)"):
     st.subheader(f"Akurasi Split 120:30 (k={k_value}): {acc:.2f}")
     show_confusion_matrix(cm, title="Confusion Matrix (Split 120:30)")
 
+def format_k_list(k_list):
+    k_list = list(map(str, k_list))
+    if len(k_list) == 1:
+        return f"nilai k {k_list[0]}"
+    elif len(k_list) == 2:
+        return f"nilai k {k_list[0]} & k {k_list[1]}"
+    else:
+        return "nilai k " + ", ".join(k_list[:-1]) + f" & k {k_list[-1]}"
+
+
 # --- Cari k terbaik (detail per fold dan akurasi tertinggi) ---
 if st.button("Cari Model Terbaik (3,4,5,7,9)"):
-    best_overall_k = None
+    best_overall_k = []
     summary_results = []  # simpan ringkasan hasil tiap k
     best_overall_acc = -1
 
@@ -196,29 +206,22 @@ if st.button("Cari Model Terbaik (3,4,5,7,9)"):
         # cek apakah ini akurasi terbaik secara keseluruhan
         if max_acc > best_overall_acc:
             best_overall_acc = max_acc
-            best_overall_k = k
+            best_overall_k = [k]   # mulai list baru dengan k ini
+        elif max_acc == best_overall_acc:
+            best_overall_k.append(k)  
 
     # buat tabel ringkasan
     df_summary = pd.DataFrame(summary_results, columns=["k", "Akurasi Rata-rata", "Akurasi Tertinggi"])
     st.write("### Ringkasan Hasil Uji k")
     st.dataframe(df_summary)
 
-    st.success(f"Model terbaik: k={best_overall_k} dengan akurasi tertinggi {best_overall_acc:.2f}")
+    st.success(f"Model terbaik: {format_k_list(best_overall_k)} dengan akurasi tertinggi {best_overall_acc:.2f}")
 
     # --- Lanjutkan ke prediksi data baru otomatis dengan model terbaik ---
 st.subheader("Prediksi Data Baru dengan Model Terbaik")
 daya = st.selectbox("Pilih Daya", [450, 900, 1300], key="best_daya")
 pulsa = st.selectbox("Pilih Pulsa", [25, 50, 100, 200, 400], key="best_pulsa")
 alat = st.number_input("Jumlah Alat (1-10)", min_value=1, max_value=10, value=3, key="best_alat")
-
-def format_k_list(k_list):
-    k_list = list(map(str, k_list))
-    if len(k_list) == 1:
-        return f"nilai k {k_list[0]}"
-    elif len(k_list) == 2:
-        return f"nilai k {k_list[0]} & k {k_list[1]}"
-    else:
-        return "nilai k " + ", ".join(k_list[:-1]) + f" & k {k_list[-1]}"
 
 if st.button("Prediksi Kelas (Model Terbaik)"):
     best_overall_k = []
@@ -252,6 +255,6 @@ if st.button("Prediksi Kelas (Model Terbaik)"):
     pred = model.predict(x_new)[0]
     st.success(
     f"Nilai akurasi yang terbaik dipilih {format_k_list(best_overall_k)} "
-    f"dengan akurasi tertinggi {(best_overall_acc * 100):.2f}% "
+    f"dengan akurasi tertinggi {best_overall_acc:.2f} "
     f"sehingga hasil prediksi kelas adalah : {pred}")
 
