@@ -102,15 +102,6 @@ daya_list = np.random.choice([450, 900, 1300], n)
 pulsa_list = np.random.choice([25, 50, 100, 200, 400], n)
 alat_list = np.random.randint(1, 11, n)  # 1–10 alat
 
-def format_k_list(k_list):
-    k_list = list(map(str, k_list))
-    if len(k_list) == 1:
-        return f"nilai k {k_list[0]}"
-    elif len(k_list) == 2:
-        return f"nilai k {k_list[0]} & k {k_list[1]}"
-    else:
-        return "nilai k " + ", ".join(k_list[:-1]) + f" & k {k_list[-1]}"
-
 # fungsi untuk tentukan kategori
 def kategori(daya, pulsa, alat):
     if daya <= 900 and pulsa <= 50 and alat <= 4:
@@ -221,6 +212,7 @@ pulsa = st.selectbox("Pilih Pulsa", [25, 50, 100, 200, 400], key="best_pulsa")
 alat = st.number_input("Jumlah Alat (1-10)", min_value=1, max_value=10, value=3, key="best_alat")
 
 
+
 if st.button("Prediksi Kelas (Model Terbaik)"):
     best_overall_k = None
     summary_results = []  # simpan ringkasan hasil tiap k
@@ -251,8 +243,4 @@ if st.button("Prediksi Kelas (Model Terbaik)"):
     model.fit(X, y)
     x_new = np.array([[daya, pulsa, alat]])
     pred = model.predict(x_new)[0]
-    st.success(
-        f"Nilai akurasi yang terbaik dipilih "
-        f"dengan akurasi tertinggi {(best_overall_acc * 100):.2f}% "
-        f"sehingga hasil prediksi kelas adalah : {pred}"
-    )
+    st.success(f"Nilai akurasi yang terbaik dipilih nilai k {", ".join(map(str, best_overall_k))} dengan akurasi tertinggi {(best_overall_acc * 100):.2f}% sehingga hasil prediksi kelas adalah : {pred}")
