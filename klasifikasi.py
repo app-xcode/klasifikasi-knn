@@ -97,22 +97,22 @@ def knn_crossval(df, k=3, n_splits=5):
 # -------------------------
 np.random.seed(42)
 
-daya_list = np.concatenate([
-    np.random.choice([450, 900], 50),         # kecil bisa 450/900
-    np.random.choice([450, 900, 1300], 50),   # sedang overlap penuh
-    np.random.choice([900, 1300], 50)         # besar bisa 900/1300
-])
-pulsa_list = np.concatenate([
-    np.random.choice([25, 50, 100], 50),      # kecil 25–100
-    np.random.choice([50, 100, 200], 50),     # sedang overlap 50–200
-    np.random.choice([100, 200, 400], 50)     # besar overlap 100–400
-])
-alat_list = np.concatenate([
-    np.random.randint(1, 7, 50),              # kecil 1–6 alat
-    np.random.randint(3, 9, 50),              # sedang 3–8 alat
-    np.random.randint(5, 11, 50)              # besar 5–10 alat
-])
-kelas_list = (["kecil"] * 50) + (["sedang"] * 50) + (["besar"] * 50)
+n = 150  # total data
+daya_list = np.random.choice([450, 900, 1300], n)
+pulsa_list = np.random.choice([25, 50, 100, 200, 400], n)
+alat_list = np.random.randint(1, 11, n)  # 1–10 alat
+
+# fungsi untuk tentukan kategori
+def kategori(daya, pulsa, alat):
+    if daya <= 900 and pulsa <= 50 and alat <= 4:
+        return "kecil"
+    elif daya <= 1300 and pulsa <= 200 and alat <= 7:
+        return "sedang"
+    else:
+        return "besar"
+
+# hitung kategori untuk setiap data
+kelas_list = [kategori(d, p, a) for d, p, a in zip(daya_list, pulsa_list, alat_list)]
 
 df_expanded = pd.DataFrame({
     "Daya": daya_list,
@@ -239,4 +239,4 @@ if st.button("Prediksi Kelas (Model Terbaik)"):
     model.fit(X, y)
     x_new = np.array([[daya, pulsa, alat]])
     pred = model.predict(x_new)[0]
-    st.success(f"Nilai akurasi yang terbaik dipilih nilai k {best_overall_k} pada fold 1,3, dan 5 serta dipilih nilai k 5 pada fold 1 : {pred}")
+    st.success(f"Nilai akurasi yang terbaik dipilih nilai k {best_overall_k} pada fold 1,3, dan 5 serta dipilih nilai k 5 pada fold 1 <br>  : {pred}")
