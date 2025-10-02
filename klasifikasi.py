@@ -6,7 +6,6 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, accuracy_score
 import matplotlib.pyplot as plt
 
-
 st.markdown(
     """
     <style>
