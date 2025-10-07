@@ -289,9 +289,8 @@ if st.button("Prediksi Kelas (Model Terbaik)"):
     # f"Nilai akurasi yang terbaik dipilih {format_k_list(best_overall_k)} "
     # f"dengan akurasi tertinggi {best_overall_acc:.2f} "
     # f"sehingga hasil prediksi kelas adalah : {pred}")
-     st.markdown(
-    f"""
-    <div style='background-color:#d4edda;
+    st.markdown(
+    f"""<div style='background-color:#d4edda;
                 color:#155724;
                 border:1px solid #c3e6cb;
                 padding:12px;
