@@ -241,10 +241,9 @@ if st.button("Cari Model Terbaik (3,4,5,7,9)"):
                 border:1px solid #c3e6cb;
                 padding:12px;
                 border-radius:8px;
-                font-size:20px;
+                font-size:15px;
                 font-weight:bold;'>
-        ✅ Model terbaik: {format_k_list(best_overall_k)}<br>
-        Akurasi tertinggi: {best_overall_acc:.2f}
+        Model terbaik: {format_k_list(best_overall_k)} Akurasi tertinggi: {best_overall_acc:.2f}
     </div>
     """,
     unsafe_allow_html=True
