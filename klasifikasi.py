@@ -241,12 +241,12 @@ if st.button("Cari Model Terbaik (3,4,5,7,9)"):
                 border:1px solid #c3e6cb;
                 padding:12px;
                 border-radius:8px;
-                font-size:17px;'>
+                font-size:20px;'>
         Model terbaik: {format_k_list(best_overall_k)} dengan akurasi tertinggi {best_overall_acc:.2f}
     </div>
     """,
     unsafe_allow_html=True
-)
+    )
 
 
     # --- Lanjutkan ke prediksi data baru otomatis dengan model terbaik ---
@@ -285,8 +285,21 @@ if st.button("Prediksi Kelas (Model Terbaik)"):
     model.fit(X, y)
     x_new = np.array([[daya, pulsa, alat]])
     pred = model.predict(x_new)[0]
-    st.success(
-    f"Nilai akurasi yang terbaik dipilih {format_k_list(best_overall_k)} "
-    f"dengan akurasi tertinggi {best_overall_acc:.2f} "
-    f"sehingga hasil prediksi kelas adalah : {pred}")
+    # st.success(
+    # f"Nilai akurasi yang terbaik dipilih {format_k_list(best_overall_k)} "
+    # f"dengan akurasi tertinggi {best_overall_acc:.2f} "
+    # f"sehingga hasil prediksi kelas adalah : {pred}")
+     st.markdown(
+    f"""
+    <div style='background-color:#d4edda;
+                color:#155724;
+                border:1px solid #c3e6cb;
+                padding:12px;
+                border-radius:8px;
+                font-size:20px;'>
+        Nilai akurasi yang terbaik dipilih {format_k_list(best_overall_k)} dengan akurasi tertinggi {best_overall_acc:.2f} sehingga hasil prediksi kelas adalah : {pred}
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
 
