@@ -193,45 +193,49 @@ if st.button("Cari Model Terbaik (3,4,5,7,9)"):
     best_overall_acc = -1
     best_overall_k = []
 
-    # jalankan KNN untuk setiap k
+    # Jalankan cross-validation untuk tiap k
     for k in k_values:
         avg_acc, fold_results, _ = knn_crossval(df_expanded, k=k, n_splits=5)
         for fold, acc in fold_results:
             fold_acc[k].append(acc)
+
+        # Simpan hasil rata-rata & tertinggi
         max_acc = max([acc for _, acc in fold_results])
         summary_results.append((k, avg_acc, max_acc))
 
-        # cari akurasi terbaik
+        # Cek model terbaik
         if max_acc > best_overall_acc:
             best_overall_acc = max_acc
             best_overall_k = [k]
         elif max_acc == best_overall_acc:
             best_overall_k.append(k)
 
-    # Buat tabel gabungan: fold sebagai baris, k sebagai kolom
+    # Buat tabel: baris = Fold, kolom = k
     df_combined = pd.DataFrame({
         f"k={k}": fold_acc[k] for k in k_values
     })
     df_combined.index = [f"Fold {i+1}" for i in range(len(next(iter(fold_acc.values()))))]
 
-    # Tambahkan baris rata-rata ke bawah tabel
-    df_combined.loc["Rata-rata"] = df_combined.mean()
+    # Tambah baris rata-rata
+    mean_row = df_combined.mean().to_dict()
+    mean_row = {**mean_row, "Akurasi Tertinggi per k": None}  # placeholder
+    df_combined.loc["Rata-rata"] = mean_row
 
-    # Tampilkan tabel
+    # Tambahkan kolom terakhir: akurasi tertinggi per k (di baris rata-rata)
+    tertinggi_dict = {f"k={k}": max([acc for acc in fold_acc[k]]) for k in k_values}
+    df_combined.at["Rata-rata", "Akurasi Tertinggi per k"] = ", ".join(
+        [f"{tertinggi_dict[col]:.2f}" for col in tertinggi_dict]
+    )
+
+    # Format tampilan tabel
     st.write("### Hasil Akurasi per Fold dan Nilai K")
     st.dataframe(df_combined.style.format("{:.2f}"))
 
-    # Ringkasan per k
-    df_summary = pd.DataFrame(summary_results, columns=["k", "Akurasi Rata-rata", "Akurasi Tertinggi"])
-    st.write("### Ringkasan Hasil Uji k")
-    st.dataframe(df_summary.style.format("{:.3f}"))
-
-    # Model terbaik
+    # Ringkasan hasil dan model terbaik
     def format_k_list(k_list):
         return ", ".join([f"k={k}" for k in k_list])
 
-    st.success(f"Model terbaik: nilai {format_k_list(best_overall_k)} dengan akurasi tertinggi {best_overall_acc:.2f}")
-
+    st.success(f"Model terbaik: {format_k_list(best_overall_k)} dengan akurasi tertinggi {best_overall_acc:.2f}")
 
     # --- Lanjutkan ke prediksi data baru otomatis dengan model terbaik ---
 st.subheader("Prediksi Data Baru dengan Model Terbaik")
