@@ -217,21 +217,15 @@ if st.button("Cari Model Terbaik (3,4,5,7,9)"):
     df_combined.index = [f"Fold {i+1}" for i in range(len(next(iter(fold_acc.values()))))]
 
     # Tambah baris rata-rata
-    mean_row = df_combined.mean().to_dict()
-    mean_row = {**mean_row, "Akurasi Tertinggi per k": None}  # placeholder
-    df_combined.loc["Rata-rata"] = mean_row
+    df_combined.loc["Rata-rata"] = df_combined.mean()
 
-    # Tambahkan kolom terakhir: akurasi tertinggi per k (di baris rata-rata)
-    tertinggi_dict = {f"k={k}": max([acc for acc in fold_acc[k]]) for k in k_values}
-    df_combined.at["Rata-rata", "Akurasi Tertinggi per k"] = ", ".join(
-        [f"{tertinggi_dict[col]:.2f}" for col in tertinggi_dict]
-    )
+    # Tambah baris akurasi tertinggi per k (di bawah rata-rata)
+    tertinggi_row = {f"k={k}": max(fold_acc[k]) for k in k_values}
+    df_combined.loc["Akurasi Tertinggi per k"] = tertinggi_row
 
-    # Format tampilan tabel
-    st.write("### Hasil Akurasi per Fold dan Nilai K")
-
-    # Format hanya kolom numerik (semua kolom selain 'Akurasi Tertinggi per k')
+    # Format tabel hanya untuk kolom numerik
     numeric_cols = df_combined.select_dtypes(include=['float', 'int']).columns
+    st.write("### Hasil Akurasi per Fold dan Nilai K")
     st.dataframe(df_combined.style.format(subset=numeric_cols, formatter="{:.2f}"))
 
     # Ringkasan hasil dan model terbaik
@@ -239,6 +233,7 @@ if st.button("Cari Model Terbaik (3,4,5,7,9)"):
         return ", ".join([f"k={k}" for k in k_list])
 
     st.success(f"Model terbaik: {format_k_list(best_overall_k)} dengan akurasi tertinggi {best_overall_acc:.2f}")
+
 
     # --- Lanjutkan ke prediksi data baru otomatis dengan model terbaik ---
 st.subheader("Prediksi Data Baru dengan Model Terbaik")
