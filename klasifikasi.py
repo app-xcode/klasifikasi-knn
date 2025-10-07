@@ -229,7 +229,10 @@ if st.button("Cari Model Terbaik (3,4,5,7,9)"):
 
     # Format tampilan tabel
     st.write("### Hasil Akurasi per Fold dan Nilai K")
-    st.dataframe(df_combined.style.format("{:.2f}"))
+
+    # Format hanya kolom numerik (semua kolom selain 'Akurasi Tertinggi per k')
+    numeric_cols = df_combined.select_dtypes(include=['float', 'int']).columns
+    st.dataframe(df_combined.style.format(subset=numeric_cols, formatter="{:.2f}"))
 
     # Ringkasan hasil dan model terbaik
     def format_k_list(k_list):
