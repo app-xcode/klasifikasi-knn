@@ -232,7 +232,11 @@ if st.button("Cari Model Terbaik (3,4,5,7,9)"):
     def format_k_list(k_list):
         return ", ".join([f"k={k}" for k in k_list])
 
-    st.success(f"Model terbaik: {format_k_list(best_overall_k)} dengan akurasi tertinggi {best_overall_acc:.2f}")
+    # st.success(f"Model terbaik: {format_k_list(best_overall_k)} dengan akurasi tertinggi {best_overall_acc:.2f}")
+
+    st.markdown("#### Model Terbaik")  
+    st.success(f"{format_k_list(best_overall_k)} dengan akurasi tertinggi {best_overall_acc:.2f}")
+
 
 
     # --- Lanjutkan ke prediksi data baru otomatis dengan model terbaik ---
