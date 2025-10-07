@@ -234,9 +234,21 @@ if st.button("Cari Model Terbaik (3,4,5,7,9)"):
 
     # st.success(f"Model terbaik: {format_k_list(best_overall_k)} dengan akurasi tertinggi {best_overall_acc:.2f}")
 
-    st.markdown("#### Model Terbaik")  
-    st.success(f"{format_k_list(best_overall_k)} dengan akurasi tertinggi {best_overall_acc:.2f}")
-
+    st.markdown(
+    f"""
+    <div style='background-color:#d4edda;
+                color:#155724;
+                border:1px solid #c3e6cb;
+                padding:12px;
+                border-radius:8px;
+                font-size:20px;
+                font-weight:bold;'>
+        ✅ Model terbaik: {format_k_list(best_overall_k)}<br>
+        Akurasi tertinggi: {best_overall_acc:.2f}
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 
     # --- Lanjutkan ke prediksi data baru otomatis dengan model terbaik ---
