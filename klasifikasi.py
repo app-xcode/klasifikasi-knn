@@ -314,7 +314,7 @@ if st.button("Prediksi Kelas"):
                     font-size:20px;
                     font-weight:bold;
                     text-align:center;'>
-            🔎 Prediksi kelas baru adalah: {pred.title()}
+             Prediksi kelas baru adalah: {pred.title()}
         </div>
         """,
         unsafe_allow_html=True
