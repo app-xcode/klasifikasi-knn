@@ -261,6 +261,7 @@ if st.button("Prediksi Kelas"):
     best_overall_k = []
     summary_results = []  # simpan ringkasan hasil tiap k
     best_overall_acc = -1
+    fold_max = 0
 
     for k in [3, 4, 5, 7, 9]:
         avg_acc, fold_results, _ = knn_crossval(df_expanded, k=k, n_splits=5)
@@ -278,6 +279,7 @@ if st.button("Prediksi Kelas"):
         if max_acc > best_overall_acc:
             best_overall_acc = max_acc
             best_overall_k = [k]   # mulai list baru dengan k ini
+            fold_max = fold_max + 1
         elif max_acc == best_overall_acc:
             best_overall_k.append(k)  
     df_expanded = fix_labels(df_expanded)
