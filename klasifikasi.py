@@ -289,15 +289,34 @@ if st.button("Prediksi Kelas"):
     # f"Nilai akurasi yang terbaik dipilih {format_k_list(best_overall_k)} "
     # f"dengan akurasi tertinggi {best_overall_acc:.2f} "
     # f"sehingga hasil prediksi kelas adalah : {pred}")
+    # Tentukan warna berdasarkan hasil prediksi
+    if pred.lower() == "kecil":
+        bg_color = "#d4edda"   # hijau muda
+        text_color = "#155724" # hijau tua
+    elif pred.lower() == "sedang":
+        bg_color = "#fff3cd"   # kuning muda
+        text_color = "#856404" # kuning tua
+    elif pred.lower() == "besar":
+        bg_color = "#f8d7da"   # merah muda
+        text_color = "#721c24" # merah tua
+    else:
+        bg_color = "#e2e3e5"   # abu-abu default
+        text_color = "#383d41" # teks abu
+    
+    # Tampilkan hasil prediksi dengan warna sesuai kelas
     st.markdown(
-    f"""<div style='background-color:#d4edda;
-                color:#155724;
-                border:1px solid #c3e6cb;
-                padding:12px;
-                border-radius:8px;
-                font-size:20px;'>
-        Prediksi kelas baru adalah : {pred.title()}
-    </div>
-    """,
-    unsafe_allow_html=True
+        f"""
+        <div style='background-color:{bg_color};
+                    color:{text_color};
+                    border:1px solid #ccc;
+                    padding:12px;
+                    border-radius:8px;
+                    font-size:20px;
+                    font-weight:bold;
+                    text-align:center;'>
+            🔎 Prediksi kelas baru adalah: {pred.title()}
+        </div>
+        """,
+        unsafe_allow_html=True
     )
+
