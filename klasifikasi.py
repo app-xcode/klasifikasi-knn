@@ -300,7 +300,7 @@ if st.button("Prediksi Kelas"):
                 padding:12px;
                 border-radius:8px;
                 font-size:20px;'>
-        Nilai akurasi yang terbaik dipilih nilai K {best_overall_k[0]} pada fold 2 dengan akurasi tertinggi {best_overall_acc:.2f}, sehingga hasil prediksi kelas baru adalah : {pred}
+        Nilai akurasi yang terbaik dipilih nilai K {best_overall_k[0]} pada fold {best_overall_k[0]} dengan akurasi tertinggi {best_overall_acc:.2f}, sehingga hasil prediksi kelas baru adalah : {pred}
     </div>
     """,
     unsafe_allow_html=True
