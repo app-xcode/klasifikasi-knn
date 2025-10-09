@@ -189,6 +189,7 @@ def format_k_list(k_list):
 if st.button("Cari Model Terbaik (3,4,5,7,9)"):
     k_values = [3, 4, 5, 7, 9]
     fold_acc = {k: [] for k in k_values}
+    fold_max =0
     summary_results = []
     best_overall_acc = -1
     best_overall_k = []
@@ -207,6 +208,7 @@ if st.button("Cari Model Terbaik (3,4,5,7,9)"):
         if max_acc > best_overall_acc:
             best_overall_acc = max_acc
             best_overall_k = [k]
+            fold_max++
         elif max_acc == best_overall_acc:
             best_overall_k.append(k)
 
@@ -242,7 +244,7 @@ if st.button("Cari Model Terbaik (3,4,5,7,9)"):
                 padding:12px;
                 border-radius:8px;
                 font-size:20px;'>
-        Model terbaik:  K {best_overall_k[0]} pada fold 2 dengan akurasi tertinggi {best_overall_acc:.2f}
+        Model terbaik:  K {best_overall_k[0]} pada fold {fold_max} dengan akurasi tertinggi {best_overall_acc:.2f}
     </div>
     """,
     unsafe_allow_html=True
