@@ -208,7 +208,7 @@ if st.button("Cari Model Terbaik (3,4,5,7,9)"):
         if max_acc > best_overall_acc:
             best_overall_acc = max_acc
             best_overall_k = [k]
-            fold_max++
+            fold_max = fold_max+1
         elif max_acc == best_overall_acc:
             best_overall_k.append(k)
 
