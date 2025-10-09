@@ -6,7 +6,6 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, accuracy_score
 import matplotlib.pyplot as plt
 
-
 st.markdown(
     """
     <style>
@@ -135,7 +134,6 @@ st.write("### Dataset overlap (150 data: 50 kecil, 50 sedang, 50 besar):")
 # st.dataframe(df_expanded.sample(10))
 st.dataframe(df_expanded)
 
-
 # Pilih nilai K (hanya 3,4,5,7,9)
 k_value = st.selectbox("Pilih Nilai K", [3, 4, 5, 7, 9], index=0)
 
@@ -183,7 +181,6 @@ def format_k_list(k_list):
         return f"nilai k {k_list[0]} & k {k_list[1]}"
     else:
         return "nilai k " + ", ".join(k_list[:-1]) + f" & k {k_list[-1]}"
-
 
 # --- Cari k terbaik (detail per fold dan akurasi tertinggi) ---
 if st.button("Cari Model Terbaik (3,4,5,7,9)"):
@@ -250,8 +247,7 @@ if st.button("Cari Model Terbaik (3,4,5,7,9)"):
     unsafe_allow_html=True
     )
 
-
-    # --- Lanjutkan ke prediksi data baru otomatis dengan model terbaik ---
+# --- Lanjutkan ke prediksi data baru otomatis dengan model terbaik ---
 st.subheader("Prediksi Data Baru")
 daya = st.selectbox("Pilih Daya", [450, 900, 1300], key="best_daya")
 pulsa = st.selectbox("Pilih Pulsa", [25, 50, 100, 200, 400], key="best_pulsa")
@@ -305,4 +301,3 @@ if st.button("Prediksi Kelas"):
     """,
     unsafe_allow_html=True
     )
-
