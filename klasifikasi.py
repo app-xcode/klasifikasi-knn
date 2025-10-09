@@ -242,7 +242,7 @@ if st.button("Cari Model Terbaik (3,4,5,7,9)"):
                 padding:12px;
                 border-radius:8px;
                 font-size:20px;'>
-        Model terbaik: {format_k_list(best_overall_k)} dengan akurasi tertinggi {best_overall_acc:.2f}
+        Model terbaik:  K {best_overall_k[0]} dengan akurasi tertinggi {best_overall_acc:.2f}
     </div>
     """,
     unsafe_allow_html=True
@@ -296,7 +296,7 @@ if st.button("Prediksi Kelas"):
                 padding:12px;
                 border-radius:8px;
                 font-size:20px;'>
-        Nilai akurasi yang terbaik dipilih nilai {format_k_list(best_overall_k)} pada fold 2 dengan akurasi tertinggi {best_overall_acc:.2f}, sehingga hasil prediksi kelas baru adalah : {pred}
+        Nilai akurasi yang terbaik dipilih nilai K {best_overall_k[0]} pada fold 2 dengan akurasi tertinggi {best_overall_acc:.2f}, sehingga hasil prediksi kelas baru adalah : {pred}
     </div>
     """,
     unsafe_allow_html=True
