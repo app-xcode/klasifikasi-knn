@@ -248,7 +248,7 @@ if st.button("Cari Model Terbaik (3,4,5,7,9)"):
     )
 
 # --- Lanjutkan ke prediksi data baru otomatis dengan model terbaik ---
-st.subheader("Prediksi Data Baru")
+st.subheader("Prediksi Pemakaian Listrik Berdasarkan Kelas Penggunaan")
 daya = st.selectbox("Pilih Daya", [450, 900, 1300], key="best_daya")
 pulsa = st.selectbox("Pilih Pulsa", [25, 50, 100, 200, 400], key="best_pulsa")
 alat = st.number_input("Jumlah Alat (1-10)", min_value=1, max_value=10, value=3, key="best_alat")
